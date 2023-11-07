@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>Text Operation</title>
+	<link rel="stylesheet" type="text/css" href="style.css">
+</head>
+<body>
+
+	<div class="textbox">
+		<div align="center" id="tbdiv">
+			<form>
+				<label for="userText"><h2>Enter a Text</h2></label>
+				<textarea name="text" id="userText" cols="30" rows="30" oninput="fetchData()"></textarea>
+				<br>
+				<button type="button" onclick="upperCase()">UPPER CASE</button>
+				<br>
+				<button type="button" onclick="lowerCase()">lower case</button>
+				<br>
+				<button type="button" onclick="reverseText()">Reverse</button>
+				<br>
+				<button type="button" onclick="clearText()">Clear</button>
+				<br>
+				<button type="button" onclick="capitalizeWords()">Capitalize Words</button>
+				<br>
+				<button type="button" onclick="removeWhitespace()">Remove Whitespace</button>
+				<br><br>
+				<h3><u>
+				  Text contains <span id="words">0</span> words & <span id="characters">0</span> characters.</u>
+			    </h3>
+			</form>
+		</div>
+	</div>
+
+	<script type="text/javascript">
+		let userText = document.getElementById('userText');
+		let words = document.getElementById('words');
+		let characters = document.getElementById('characters');
+
+		function fetchData() {
+			let text = userText.value;
+			let wordArray = text.match(/\b\w+\b/g);
+			let charCount = text.length;
+
+			words.innerHTML = wordArray ? wordArray.length : 0;
+			characters.innerHTML = charCount;
+		}
+
+		function upperCase() {
+			userText.value = userText.value.toUpperCase();
+			fetchData();
+		}
+
+		function lowerCase() {
+			userText.value = userText.value.toLowerCase();
+			fetchData();
+		}
+		function reverseText() {
+		    let text = userText.value;
+		    let reversedText = text.split('').reverse().join('');
+		    userText.value = reversedText;
+		    fetchData(); // Call fetchData to update word and character counts
+		}
+		function clearText() {
+            userText.value = '';
+            fetchData(); // Call fetchData to update word and character counts
+        }
+        function capitalizeWords()
+        {
+		    userText.value = userText.value.replace(/\b\w/g, (char) => char.toUpperCase());
+		    fetchData();
+		}
+
+		function removeWhitespace()
+		{
+		    userText.value = userText.value.replace(/\s/g, '');
+		    fetchData();
+		}
+	</script>
+</body>
+</html>
